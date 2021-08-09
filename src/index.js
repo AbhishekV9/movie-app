@@ -8,19 +8,19 @@ import movies from './reducers'
 
 
 const store=createStore(movies); //creating store(redux),we need to pass an argument in createStore i.e reducers
-console.log('store',store)
-console.log('Before state',store.getState());
+// console.log('store',store)
+// console.log('Before state',store.getState());
 
-store.dispatch({
-  type:'ADD_MOVIES',
-  movies:[{name:'superman'}]
-})
+// store.dispatch({
+//   type:'ADD_MOVIES',
+//   movies:[{name:'superman'}]
+// })
 
-console.log('After state',store.getState());
+// console.log('After state',store.getState());
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <App store={store}/>
   </React.StrictMode>,
   document.getElementById('root')
 );
