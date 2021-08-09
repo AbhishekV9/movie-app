@@ -14,8 +14,8 @@ function App() {
           <div className="tab">Favourites</div>
         </div>
         <div className="list">
-            {data.map(movie =>(
-              <MovieCard movie={movie}/>
+            {data.map((movie,index) =>(  //we are getting each item of data array and index of that item also through map function
+              <MovieCard movie={movie} key={`movies-${index}`}/>
             ))}
         </div>
       </div>
