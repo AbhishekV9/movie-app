@@ -7,6 +7,14 @@
 //     type:'DECREASE_COUNT'  
 // }
 
-{
-    type:"ADD_MOVIES"
+//action types
+export const ADD_MOVIES='ADD_MOVIES';//by this we are avoiding string comparisons
+
+
+//action creators
+export function addMovies(movies){
+    return{
+      type:ADD_MOVIES,
+      movies  //using short hand here
+    }
 }
