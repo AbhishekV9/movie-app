@@ -8,8 +8,8 @@ import movies from './reducers'
 
 
 const store=createStore(movies); //creating store(redux),we need to pass an argument in createStore i.e reducers
-// console.log('store',store)
-// console.log('Before state',store.getState());
+ console.log('store',store)
+ console.log('Before state',store.getState());
 
 // store.dispatch({
 //   type:'ADD_MOVIES',
