@@ -21,6 +21,17 @@ class App extends React.Component{
     console.log('dispatched');
   }
 
+  isMovieFavorite=(movie)=>{
+    const {favorites} =this.props.store.getState();
+    const index=favorites.indexOf(movie); //if movie is available in favorites then we will gwt it's index otherwise
+    //will get -1
+    if(index!== -1){
+      //found the movie in favorites
+      return true;
+    }
+    return false; //movie not found in favorites
+  }
+
   render(){
 //    const movies=this.props.store.getState();  Earlier our state was simply an array now our state is an object with list array and favorites array
       const {list}=this.props.store.getState();
@@ -35,7 +46,12 @@ class App extends React.Component{
             </div>
             <div className="list">
                 {list.map((movie,index) =>(  //we are getting each item of data array and index of that item also through map function
-                  <MovieCard movie={movie} key={`movies-${index}`}/>
+                  <MovieCard
+                  movie={movie} 
+                  key={`movies-${index}`} 
+                  dispatch={this.props.store.dispatch}
+                  isFavorite={this.isMovieFavorite(movie)}
+                  />
                 ))}
             </div>
           </div>
