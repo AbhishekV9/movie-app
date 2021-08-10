@@ -1,14 +1,15 @@
-import { ADD_MOVIES,ADD_TO_FAVORITES,REMOVE_FROM_FAVORITES } from '../actions'
+import { ADD_MOVIES,ADD_TO_FAVORITES,REMOVE_FROM_FAVORITES,SET_SHOW_FAVORITES } from '../actions'
 
 const intitialMoviesState={
     list:[],
-    favorites:[]
+    favorites:[],
+    showFavorites:false
 }
 export default function movies (state=intitialMoviesState,action){
     // if(action.type === ADD_MOVIES){
     //     console.log(action.movies)
     //     console.log('inside reducer action');
-    //     return {
+    //     return {                      returning an object here because our state is now an object
     //         ...state,
     //         list:action.movies
     //     }
@@ -35,6 +36,11 @@ export default function movies (state=intitialMoviesState,action){
             return{
                 ...state,
                 favorites:filteredArray
+            }
+        case SET_SHOW_FAVORITES:
+            return{
+                ...state,
+                showFavorites:action.val
             }
         default:
             return state;

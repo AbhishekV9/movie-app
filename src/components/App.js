@@ -2,7 +2,7 @@ import React from "react";
 import {data} from "../data";
 import Navbar from "./Navbar";
 import MovieCard from "./MovieCard";
-import { addMovies } from "../actions";
+import { addMovies,setShowFavorites } from "../actions";
 
 
 class App extends React.Component{
@@ -32,20 +32,28 @@ class App extends React.Component{
     return false; //movie not found in favorites
   }
 
+  onChangeTab=(val)=>{
+    this.props.store.dispatch(setShowFavorites(val));
+  }
+
   render(){
 //    const movies=this.props.store.getState();  Earlier our state was simply an array now our state is an object with list array and favorites array
-      const {list}=this.props.store.getState();
+      const {list , favorites , showFavorites }=this.props.store.getState();
       console.log('RENDER',this.props.store.getState());
-      return (
+
+      const displayMovies=showFavorites ? favorites : list ;
+
+      return ( 
         <div className="App">
           <Navbar />
           <div className="main">
             <div className="tabs">
-              <div className="tab">Movies</div>
-              <div className="tab">Favourites</div>
+              <div className={`tab ${showFavorites ? '': 'active-tabs'}`} onClick={()=>this.onChangeTab(false)} >Movies</div> 
+              {/* we are calling the function onclick isntead of passing the refference of the function */}
+              <div className={`tab ${showFavorites ? 'active-tabs': ''}`} onClick={()=>this.onChangeTab(true)} >Favourites</div>
             </div>
             <div className="list">
-                {list.map((movie,index) =>(  //we are getting each item of data array and index of that item also through map function
+                {displayMovies.map((movie,index) =>(  //we are getting each item of data array and index of that item also through map function
                   <MovieCard
                   movie={movie} 
                   key={`movies-${index}`} 
@@ -54,6 +62,7 @@ class App extends React.Component{
                   />
                 ))}
             </div>
+            {displayMovies.length === 0 ? <div className="no-movies">No Movies To Dispaly </div> : null }
           </div>
         </div>
       );

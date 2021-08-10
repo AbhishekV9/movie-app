@@ -11,6 +11,7 @@
 export const ADD_MOVIES='ADD_MOVIES';       //by this we are avoiding string comparisons
 export const ADD_TO_FAVORITES='ADD_TO_FAVORITES';
 export const REMOVE_FROM_FAVORITES='REMOVE_FROM_FAVORITES';
+export const SET_SHOW_FAVORITES='SET_SHOW_FAVORITES';
 
 
 //action creators
@@ -34,3 +35,11 @@ export function removeFromFavorite(movie){
     movie
   }
 }
+
+export function setShowFavorites(val){ //value will be either true or false
+  return{
+    type:SET_SHOW_FAVORITES,
+    val
+  }
+}
+
