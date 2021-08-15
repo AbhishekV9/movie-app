@@ -1,4 +1,8 @@
-import { ADD_MOVIES,ADD_TO_FAVORITES,REMOVE_FROM_FAVORITES,SET_SHOW_FAVORITES } from '../actions'
+import { combineReducers } from 'redux';
+import { ADD_MOVIES,
+    ADD_TO_FAVORITES,
+    REMOVE_FROM_FAVORITES,
+    SET_SHOW_FAVORITES } from '../actions'
 
 const intitialMoviesState={
     list:[],
@@ -63,9 +67,19 @@ const initialRootState={
     search:initialSearchState
 }
 
-export default function rootReducer(state=initialRootState,action){
-    return{
-        movies:movies(state.movies,action),  //we are just telling that movies state should manage by movies reducer
-        search:search(state.search,action)   //and search state should be manage by search reducer
-    }
-}
+
+//we dont need to write this method,it is already created for us by redux and we can just import it
+// export default function rootReducer(state=initialRootState,action){
+//     return{
+//         movies:movies(state.movies,action),  //we are just telling that movies state should manage by movies reducer
+//         search:search(state.search,action)   //and search state should be manage by search reducer
+//     }
+// }
+
+//and this method requires ana argument wich should be an object
+export default combineReducers({
+    // movies:movies, as name of rpoperty and reducers are same we can use shorthand here 
+    // search:search  the s movie or state is just called internally like above with aguments
+    movies,
+    search
+})
