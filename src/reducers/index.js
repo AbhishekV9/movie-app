@@ -5,7 +5,8 @@ const intitialMoviesState={
     favorites:[],
     showFavorites:false
 }
-export default function movies (state=intitialMoviesState,action){
+export  function movies (state=intitialMoviesState,action){
+    console.log('Movies Reducer');
     // if(action.type === ADD_MOVIES){
     //     console.log(action.movies)
     //     console.log('inside reducer action');
@@ -47,3 +48,24 @@ export default function movies (state=intitialMoviesState,action){
     }
 }
 
+
+const initialSearchState={
+    result:{}
+}
+
+export function search(state=initialSearchState,action){
+    console.log('search Reducer');
+    return state;
+}
+
+const initialRootState={
+    movies:intitialMoviesState,
+    search:initialSearchState
+}
+
+export default function rootReducer(state=initialRootState,action){
+    return{
+        movies:movies(state.movies,action),  //we are just telling that movies state should manage by movies reducer
+        search:search(state.search,action)   //and search state should be manage by search reducer
+    }
+}

@@ -4,10 +4,10 @@ import {createStore} from 'redux';
 
 import './index.css';
 import App from './components/App';
-import movies from './reducers'
+import rootReducer from './reducers'
 
 
-const store=createStore(movies); //creating store(redux),we need to pass an argument in createStore i.e reducers
+const store=createStore(rootReducer); //creating store(redux),we need to pass an argument in createStore i.e reducers and we can provide only one reducer here
  console.log('store',store)
  console.log('Before state',store.getState());
 

@@ -11,7 +11,7 @@ class App extends React.Component{
     const {store}=this.props;
     store.subscribe(()=>{   //subscribe takes function as an argument,whenever we dispatch an action this subscribe will be called.
       console.log('subscribed');
-      this.forceUpdate();  //we should avoid using this forcrupdate function
+      this.forceUpdate();  //we should avoid using this forceupdate function
     });
     //make an api call then
     //dispatch an action
@@ -22,8 +22,8 @@ class App extends React.Component{
   }
 
   isMovieFavorite=(movie)=>{
-    const {favorites} =this.props.store.getState();
-    const index=favorites.indexOf(movie); //if movie is available in favorites then we will gwt it's index otherwise
+    const {movies} =this.props.store.getState();
+    const index=movies.favorites.indexOf(movie); //if movie is available in favorites then we will gwt it's index otherwise
     //will get -1
     if(index!== -1){
       //found the movie in favorites
@@ -38,7 +38,8 @@ class App extends React.Component{
 
   render(){
 //    const movies=this.props.store.getState();  Earlier our state was simply an array now our state is an object with list array and favorites array
-      const {list , favorites , showFavorites }=this.props.store.getState();
+      const {movies}=this.props.store.getState(); // current state looks like = {movies:{}, search:{}}
+      const {list , favorites , showFavorites }=movies;
       console.log('RENDER',this.props.store.getState());
 
       const displayMovies=showFavorites ? favorites : list ;
