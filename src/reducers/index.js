@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import { ADD_MOVIES,
+    ADD_SEARCH_RESULT,
     ADD_TO_FAVORITES,
     REMOVE_FROM_FAVORITES,
-    SET_SHOW_FAVORITES } from '../actions'
+    SET_SHOW_FAVORITES,
+    ADD_MOVIE_TO_LIST    } from '../actions'
 
 const intitialMoviesState={
     list:[],
@@ -47,6 +49,11 @@ export  function movies (state=intitialMoviesState,action){
                 ...state,
                 showFavorites:action.val
             }
+        case ADD_MOVIE_TO_LIST:
+            return{
+                ...state,
+                list:[action.movie,...state.list]
+            }
         default:
             return state;
     }
@@ -54,12 +61,29 @@ export  function movies (state=intitialMoviesState,action){
 
 
 const initialSearchState={
-    result:{}
+    result:{},
+    showSearchResults:false
 }
 
 export function search(state=initialSearchState,action){
-    console.log('search Reducer');
-    return state;
+    //console.log('search Reducer');
+    //return state;
+   // ADD_SEARCH_RESULT
+    switch(action.type){
+        case ADD_SEARCH_RESULT:
+           return {
+            ...state,
+            result:action.movie,
+            showSearchResults:true
+        }
+        case ADD_MOVIE_TO_LIST:
+            return{
+                ...state,
+                showSearchResults:false
+            }
+        default:
+            return state;
+    }
 }
 
 // const initialRootState={
@@ -80,6 +104,6 @@ export function search(state=initialSearchState,action){
 export default combineReducers({
     // movies:movies, as name of rpoperty and reducers are same we can use shorthand here 
     // search:search  the movie or state is just called internally like above with aguments
-    movies,
+    movies :movies ,
     search
 })

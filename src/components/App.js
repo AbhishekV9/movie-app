@@ -38,7 +38,7 @@ class App extends React.Component{
 
   render(){
 //    const movies=this.props.store.getState();  Earlier our state was simply an array now our state is an object with list array and favorites array
-      const {movies}=this.props.store.getState(); // current state looks like = {movies:{}, search:{}}
+      const {movies,search}=this.props.store.getState(); // current state looks like = {movies:{}, search:{}}
       const {list , favorites , showFavorites }=movies;
       console.log('RENDER',this.props.store.getState());
 
@@ -46,7 +46,7 @@ class App extends React.Component{
 
       return ( 
         <div className="App">
-          <Navbar dispatch={this.props.store.dispatch}/>
+          <Navbar dispatch={this.props.store.dispatch} search={search}/>
           <div className="main">
             <div className="tabs">
               <div className={`tab ${showFavorites ? '': 'active-tabs'}`} onClick={()=>this.onChangeTab(false)} >Movies</div> 

@@ -13,6 +13,7 @@ export const ADD_TO_FAVORITES='ADD_TO_FAVORITES';
 export const REMOVE_FROM_FAVORITES='REMOVE_FROM_FAVORITES';
 export const SET_SHOW_FAVORITES='SET_SHOW_FAVORITES';
 export const ADD_MOVIE_TO_LIST='ADD_MOVIE_TO_LIST';
+export const ADD_SEARCH_RESULT='ADD_SEARCH_RESULT';
 
 //action creators
 export function addMovies(movies){   //here movies is list of objects
@@ -57,7 +58,17 @@ export function handleMovieSearh(searchText){
     .then(response => response.json())
     .then(movie => {
       console.log('movie',movie);
+
+      //dispatch an action
+      dispatch(addMovieSearchresult(movie));
     });
   };
   //our actions generally return an object but here we are returning a function so here we basically want to tell redux that hey if you get an action then just simply pass this action to the reducer and if you get a function like this then just call this function with dispatch as the argument :- for this we can use middleware 
+}
+
+export function addMovieSearchresult(movie){
+  return {
+    type:ADD_SEARCH_RESULT,
+    movie
+  };
 }
