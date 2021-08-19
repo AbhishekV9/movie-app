@@ -1,22 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import {createStore} from 'redux';
+import {createStore,applyMiddleware} from 'redux';
+import thunk from 'redux-thunk';
 
 import './index.css';
 import App from './components/App';
-import rootReducer from './reducers'
+import rootReducer from './reducers';
 
 
-const store=createStore(rootReducer); //creating store(redux),we need to pass an argument in createStore i.e reducers and we can provide only one reducer here
+var logger=({dispatch,getState})=>(next)=>(action)=>{
+  console.log('logger');
+  if(typeof action !== 'function'){
+    console.log("ACTION_TYPE=",action.type);
+  }
+  next(action);
+}
+
+// var thunk=({dispatch,getState})=>(next)=>(action)=>{   commenting this because we qhave a package called thunk
+//     if(typeof action==='function'){
+//       action(dispatch);
+//       return;
+//     }
+//     next(action);
+//   }
+
+
+const store=createStore(rootReducer,applyMiddleware(logger,thunk));
  console.log('store',store)
  console.log('Before state',store.getState());
 
-// store.dispatch({
-//   type:'ADD_MOVIES',
-//   movies:[{name:'superman'}]
-// })
 
-// console.log('After state',store.getState());
 
 ReactDOM.render(
   <React.StrictMode>

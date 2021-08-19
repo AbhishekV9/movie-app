@@ -7,7 +7,7 @@ import { addMovies,setShowFavorites } from "../actions";
 
 class App extends React.Component{
   componentDidMount(){
-    console.log(this.props)
+    console.log("propd",this.props)
     const {store}=this.props;
     store.subscribe(()=>{   //subscribe takes function as an argument,whenever we dispatch an action this subscribe will be called.
       console.log('subscribed');
@@ -46,7 +46,7 @@ class App extends React.Component{
 
       return ( 
         <div className="App">
-          <Navbar />
+          <Navbar dispatch={this.props.store.dispatch}/>
           <div className="main">
             <div className="tabs">
               <div className={`tab ${showFavorites ? '': 'active-tabs'}`} onClick={()=>this.onChangeTab(false)} >Movies</div> 

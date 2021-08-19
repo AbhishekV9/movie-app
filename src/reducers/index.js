@@ -10,7 +10,7 @@ const intitialMoviesState={
     showFavorites:false
 }
 export  function movies (state=intitialMoviesState,action){
-    console.log('Movies Reducer');
+    console.log('Movies Reducerssss');
     // if(action.type === ADD_MOVIES){
     //     console.log(action.movies)
     //     console.log('inside reducer action');
@@ -62,10 +62,10 @@ export function search(state=initialSearchState,action){
     return state;
 }
 
-const initialRootState={
-    movies:intitialMoviesState,
-    search:initialSearchState
-}
+// const initialRootState={
+//     movies:intitialMoviesState,
+//     search:initialSearchState
+// }
 
 
 //we dont need to write this method,it is already created for us by redux and we can just import it
@@ -79,7 +79,7 @@ const initialRootState={
 //and this method requires ana argument wich should be an object
 export default combineReducers({
     // movies:movies, as name of rpoperty and reducers are same we can use shorthand here 
-    // search:search  the s movie or state is just called internally like above with aguments
+    // search:search  the movie or state is just called internally like above with aguments
     movies,
     search
 })
