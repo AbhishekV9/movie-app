@@ -61,7 +61,7 @@ export  function movies (state=intitialMoviesState,action){
 
 
 const initialSearchState={
-    result:{},
+    result:{}, //we are using &t paramete in our api call so we will get one movie based on title and we if use &s parameter then we have change result as an array like:- result:[] because $s will result collection of movies
     showSearchResults:false
 }
 

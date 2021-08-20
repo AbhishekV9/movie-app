@@ -1,3 +1,4 @@
+import { createContext } from 'react';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore,applyMiddleware} from 'redux';
@@ -6,6 +7,7 @@ import thunk from 'redux-thunk';
 import './index.css';
 import App from './components/App';
 import rootReducer from './reducers';
+import { react } from '@babel/types';
 
 
 var logger=({dispatch,getState})=>(next)=>(action)=>{
@@ -29,11 +31,25 @@ const store=createStore(rootReducer,applyMiddleware(logger,thunk));
  console.log('store',store)
  console.log('Before state',store.getState());
 
+export const storeContext=createContext();
+console.log('storeContext',storeContext);
 
+class Provider extends React.Component{
+  render(){
+    const {store}=this.props;
+    return <storeContext.Provider value={store}>
+     {this.props.children} 
+     {/* renders whatever children are in between provider tag   */}
+    </storeContext.Provider>
+  }
+}
 
 ReactDOM.render(
   <React.StrictMode>
-    <App store={store}/>
+    <Provider store={store}>  
+      {/* <App store={store}/>  removed this because we are using now context*/}
+      <App />
+    </Provider> 
   </React.StrictMode>,
   document.getElementById('root')
 );
