@@ -44,40 +44,44 @@ class App extends React.Component{
       console.log('RENDER',this.props.store.getState());
 
       const displayMovies=showFavorites ? favorites : list ;
-
-      return(
-        <storeContext.Consumer>
-          {(store)=>{
-             
-             return ( 
-              <div className="App">
-                <Navbar dispatch={this.props.store.dispatch} search={search}/>
-                <div className="main">
-                  <div className="tabs">
-                    <div className={`tab ${showFavorites ? '': 'active-tabs'}`} onClick={()=>this.onChangeTab(false)} >Movies</div> 
-                    {/* we are calling the function onclick isntead of passing the refference of the function */}
-                    <div className={`tab ${showFavorites ? 'active-tabs': ''}`} onClick={()=>this.onChangeTab(true)} >Favourites</div>
-                  </div>
-                  <div className="list">
-                      {displayMovies.map((movie,index) =>(  //we are getting each item of data array and index of that item also through map function
-                        <MovieCard
-                        movie={movie} 
-                        key={`movies-${index}`} 
-                        dispatch={this.props.store.dispatch}
-                        isFavorite={this.isMovieFavorite(movie)}
-                        />
-                      ))}
-                  </div>
-                  {displayMovies.length === 0 ? <div className="no-movies">No Movies To Dispaly </div> : null }
-                </div>
-              </div>
-            );
-
-          }}
-
-        </storeContext.Consumer>
-      )
+      
+    
+      return ( 
+        <div className="App">
+          <Navbar search={search}/>
+          <div className="main">
+            <div className="tabs">
+              <div className={`tab ${showFavorites ? '': 'active-tabs'}`} onClick={()=>this.onChangeTab(false)} >Movies</div> 
+              {/* we are calling the function onclick isntead of passing the refference of the function */}
+              <div className={`tab ${showFavorites ? 'active-tabs': ''}`} onClick={()=>this.onChangeTab(true)} >Favourites</div>
+            </div>
+            <div className="list">
+                {displayMovies.map((movie,index) =>(  //we are getting each item of data array and index of that item also through map function
+                  <MovieCard
+                  movie={movie} 
+                  key={`movies-${index}`} 
+                  dispatch={this.props.store.dispatch}
+                  isFavorite={this.isMovieFavorite(movie)}
+                  />
+                ))}
+            </div>
+            {displayMovies.length === 0 ? <div className="no-movies">No Movies To Dispaly </div> : null }
+          </div>
+        </div>
+      );
     }
 }
 
-export default App;
+
+//app wrapper to use context inside app everywhere
+class AppWrapper extends React.Component{
+  render(){
+    return(
+      <storeContext.Consumer>
+        { (store)=> <App store={store} /> }
+      </storeContext.Consumer>
+    );   
+  }
+}
+
+export default AppWrapper;
