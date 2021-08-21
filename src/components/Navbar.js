@@ -1,5 +1,8 @@
 import React from "react";
-import { storeContext } from "../index";
+import {connect} from "react-redux";
+
+//import { storeContext } from "../index";
+//import {connect } from "../index";
 
 //import {data} from "../data";
 import {addMovieToList,handleMovieSearh} from "../actions";
@@ -65,15 +68,25 @@ class Navbar extends React.Component{
 
 }
 
-class NavbarWrapper extends React.Component{
-  render(){
-      return(
-          <storeContext.Consumer>
-            {(store)=> <Navbar dispatch={store.dispatch} search={this.props.search} /> }
+// class NavbarWrapper extends React.Component{
+//   render(){
+//       return(
+//           <storeContext.Consumer>
+//             {(store)=> <Navbar dispatch={store.dispatch} search={this.props.search} /> }
 
-          </storeContext.Consumer>
-      )
-  }
+//           </storeContext.Consumer>
+//       )
+//   }
+// }
+
+
+//destructuring here as we will get state in argument and then we are taking search from state
+function mapStateToProps({search}){
+    return{
+        //search:search
+        search
+    }
 }
 
-export default NavbarWrapper;
+
+export default connect (mapStateToProps)(Navbar);
