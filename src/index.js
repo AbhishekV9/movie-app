@@ -21,6 +21,7 @@ var logger=({dispatch,getState})=>(next)=>(action)=>{
   next(action);
 }
 
+//thunk is used so that when we get typeof action as function we can call that action with dispatch
 // var thunk=({dispatch,getState})=>(next)=>(action)=>{   commenting this because we qhave a package called thunk
 //     if(typeof action==='function'){
 //       action(dispatch);

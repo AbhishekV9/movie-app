@@ -46,7 +46,7 @@ class App extends React.Component{
       console.log('RENDERrrr',this.props);
 
       const displayMovies=showFavorites ? favorites : list ;
-      
+      console.log('displayMovies',displayMovies);
     
       return ( 
         <div className="App">

@@ -12,7 +12,7 @@ const intitialMoviesState={
     showFavorites:false
 }
 export  function movies (state=intitialMoviesState,action){
-    console.log('Movies Reducerssss');
+    console.log('Movies Reducerssss',action);
     // if(action.type === ADD_MOVIES){
     //     console.log(action.movies)
     //     console.log('inside reducer action');
